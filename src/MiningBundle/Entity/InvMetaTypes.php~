@@ -1,0 +1,31 @@
+<?php
+
+namespace MiningBundle\Entity;
+
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * @ORM\Entity
+ * @ORM\Table(name="invMetaTypes")
+ */
+class InvMetaTypes
+{
+    /**
+     * @ORM\Id
+     * @ORM\Column(name="typeID", type="integer")
+     * @ORM\GeneratedValue
+     */
+    private $typeId;
+
+    /**
+     * @ORM\Column(name="parentTypeID", type="integer")
+     */
+    private $parentTypeId;
+
+    /**
+     * @ORM\Column(name="metaGroupID", type="integer")
+     */
+    private $metaGroupId;
+}
+

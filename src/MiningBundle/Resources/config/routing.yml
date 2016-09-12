@@ -1,0 +1,17 @@
+mining_homepage:
+    path:     /
+    defaults: { _controller: MiningBundle:Default:index }
+
+mining_new:
+  path: /new
+  defaults: { _controller: MiningBundle:Mining:new }
+
+mining_detail:
+  path: /detail/{hash}
+  defaults: { _controller: MiningBundle:Mining:detail }
+  methods: [GET]
+
+mining_detail_update:
+  path: /detail/{hash}
+  defaults: { _controller: MiningBundle:Mining:process }
+  methods: [POST, PUT]

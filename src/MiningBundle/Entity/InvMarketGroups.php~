@@ -1,0 +1,57 @@
+<?php
+
+namespace MiningBundle\Entity;
+
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * @ORM\Entity
+ * @ORM\Table(name="invMarketGroups")
+ */
+class InvMarketGroups
+{
+    /**
+     * @ORM\Id
+     * @ORM\Column(name="marketGroupID", type="integer")
+     * @ORM\GeneratedValue
+     */
+    private $marketGroupId;
+
+    /**
+     * Need to figure out what this maps to
+     * Doesnt map to invGroups
+     * @ORM\Column(name="parentGroupID", type="integer")
+     */
+    private $parentGroupId;
+
+    /**
+     * @ORM\OneToMany(targetEntity="InvTypes", mappedBy="marketGroupId")
+     */
+    private $invTypes;
+
+    /**
+     * @ORM\Column(name="marketGroupName", type="string", length=100)
+     */
+    private $marketGroupName;
+
+    /**
+     * @ORM\Column(name="description", type="string", length=3000)
+     */
+    private $description;
+
+    /**
+     * @ORM\Column(name="iconID", type="integer")
+     */
+    private $iconid;
+
+    /**
+     * @ORM\Column(name="hasTypes", type="integer")
+     */
+    private $hasTypes;
+
+    public function __construct() {
+        $this->invTypes = new ArrayCollection();
+    }
+}
+

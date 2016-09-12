@@ -1,0 +1,93 @@
+<?php
+
+namespace MiningBundle\Entity;
+
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * @ORM\Entity
+ * @ORM\Table(name="invTypes")
+ */
+class InvTypes
+{
+    /**
+     * @ORM\Id
+     * @ORM\Column(name="typeID", type="integer")
+     * @ORM\GeneratedValue
+     */
+    private $typeID;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="InvGroups", inversedBy="invTypes")
+     * @ORM\JoinColumn(name="groupID", referencedColumnName="groupID")
+     */
+    private $groupId;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="InvMarketGroups", inversedBy="invTypes")
+     * @ORM\JoinColumn(name="marketGroupID", referencedColumnName="marketGroupID")
+     */
+    private $marketGroupId;
+
+    /**
+     * @ORM\Column(name="typeName", type="string", length=100)
+     */
+    private $typeName;
+
+    /**
+     * @ORM\Column(name="description", type="string", length=1000)
+     */
+    private $description;
+
+    /**
+     * @ORM\Column(name="mass", type="float")
+     */
+    private $mass;
+
+    /**
+     * @ORM\Column(name="volume", type="float")
+     */
+    private $volume;
+
+    /**
+     * @ORM\Column(name="capacity", type="float")
+     */
+    private $capacity;
+
+    /**
+     * @ORM\Column(name="portionSize", type="integer")
+     */
+    private $portionSize;
+
+    /**
+     * @ORM\Column(name="raceID", type="integer")
+     */
+    private $raceId;
+
+    /**
+     * @ORM\Column(name="basePrice", type="decimal", precision=19, scale=4)
+     */
+    private $basePrice;
+
+    /**
+     * @ORM\Column(name="published", type="integer")
+     */
+    private $published;
+
+    /**
+     * @ORM\Column(name="iconID", type="integer")
+     */
+    private $iconId;
+
+    /**
+     * @ORM\Column(name="soundID", type="integer")
+     */
+    private $soundId;
+
+    /**
+     * @ORM\Column(name="graphicID", type="integer")
+     */
+    private $graphicId;
+}
+

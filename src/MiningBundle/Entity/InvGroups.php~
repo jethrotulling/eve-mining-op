@@ -1,0 +1,71 @@
+<?php
+
+namespace MiningBundle\Entity;
+
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * @ORM\Entity
+ * @ORM\Table(name="invGroups")
+ */
+class InvGroups
+{
+    /**
+     * @ORM\Id
+     * @ORM\Column(name="groupID", type="integer")
+     * @ORM\GeneratedValue
+     */
+    private $groupId;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="InvCategories", inversedBy="invGroups")
+     * @ORM\JoinColumn(name="categoryID", referencedColumnName="categoryID")
+     */
+    private $categoryId;
+
+    /**
+     * @ORM\OneToMany(targetEntity="InvTypes", mappedBy="groupId")
+     */
+    private $invTypes;
+
+    /**
+     * @ORM\Column(name="groupName", type="string", length=100)
+     */
+    private $groupName;
+
+    /**
+     * @ORM\Column(name="iconID", type="integer")
+     */
+    private $iconId;
+
+    /**
+     * @ORM\Column(name="useBasePrice", type="integer")
+     */
+    private $useBasePrice;
+
+    /**
+     * @ORM\Column(name="anchored", type="integer")
+     */
+    private $anchored;
+
+    /**
+     * @ORM\Column(name="anchorable", type="integer")
+     */
+    private $anchorable;
+
+    /**
+     * @ORM\Column(name="fittableNonSingleton", type="integer")
+     */
+    private $fittableNonSingleton;
+
+    /**
+     * @ORM\Column(name="published", type="integer")
+     */
+    private $published;
+
+    public function __construct() {
+        $this->invTypes = new ArrayCollection();
+    }
+}
+

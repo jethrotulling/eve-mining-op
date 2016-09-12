@@ -1,0 +1,44 @@
+<?php
+
+namespace MiningBundle\Entity;
+
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * @ORM\Entity
+ * @ORM\Table(name="invCategories")
+ */
+class InvCategories
+{
+    /**
+     * @ORM\Id
+     * @ORM\Column(name="categoryID", type="integer")
+     * @ORM\GeneratedValue
+     */
+    private $categoryId;
+
+    /**
+     * @ORM\OneToMany(targetEntity="InvGroups", mappedBy="categoryId")
+     */
+    private $invGroups;
+
+    /**
+     * @ORM\Column(name="categoryName", type="string", length=64)
+     */
+    private $categoryName;
+
+    /**
+     * @ORM\Column(name="iconID", type="integer")
+     */
+    private $iconId;
+
+    /**
+     * @ORM\Column(name="published", type="integer")
+     */
+    private $published;
+
+    public function __construct() {
+        $this->invGroups = new ArrayCollection();
+    }
+}
