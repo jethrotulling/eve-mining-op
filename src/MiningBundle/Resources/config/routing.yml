@@ -3,15 +3,15 @@ mining_homepage:
     defaults: { _controller: MiningBundle:Home:index }
 
 mining_new:
-  path: /new
-  defaults: { _controller: MiningBundle:Mining:new }
+  path: /fleet
+  defaults: { _controller: MiningBundle:Fleet:new }
 
 mining_detail:
   path: /fleet/{hash}
-  defaults: { _controller: MiningBundle:Mining:detail }
+  defaults: { _controller: MiningBundle:Fleet:detail }
   methods: [GET]
 
 mining_detail_update:
   path: /fleet/{hash}
-  defaults: { _controller: MiningBundle:Mining:process }
+  defaults: { _controller: MiningBundle:Fleet:process }
   methods: [POST, PUT]

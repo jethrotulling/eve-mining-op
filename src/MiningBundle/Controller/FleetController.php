@@ -6,6 +6,7 @@ use MiningBundle\Entity\Character;
 use MiningBundle\Entity\Item;
 use MiningBundle\Entity\ItemGroup;
 use MiningBundle\Entity\LootLog;
+use MiningBundle\Entity\MiningOp;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
@@ -15,14 +16,17 @@ use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
 
-//use Symfony\Component\HttpFoundation\File\UploadedFile;
 
-
-use MiningBundle\Entity\MiningOp;
-
-class MiningController extends Controller
+class FleetController extends Controller
 {
 
+    /**
+     * Creates a new fleet
+     *
+     * @param Request $request
+     *
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
+     */
     public function newAction(Request $request)
     {
 
@@ -59,6 +63,14 @@ class MiningController extends Controller
         ]);
     }
 
+    /**
+     * Show fleet details
+     *
+     * @param         $hash
+     * @param Request $request
+     *
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
+     */
     public function detailAction($hash, Request $request)
     {
 
@@ -98,6 +110,14 @@ class MiningController extends Controller
         ]);
     }
 
+    /**
+     * Update fleet details with lootlog info
+     *
+     * @param         $hash
+     * @param Request $request
+     *
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse
+     */
     public function processAction($hash, Request $request)
     {
 
