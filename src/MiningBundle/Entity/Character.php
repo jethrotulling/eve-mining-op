@@ -32,11 +32,16 @@ class Character
      */
     private $lootLog;
 
+    /**
+     * @ORM\ManyToOne(targetEntity="User", inversedBy="character")
+     * @ORM\JoinColumn(name="user_id", referencedColumnName="id")
+     */
+    private $user;
+
     public function __construct() {
         $this->miningOp = new ArrayCollection();
         $this->lootLog = new ArrayCollection();
     }
-
 
     /**
      * Get id
@@ -138,5 +143,29 @@ class Character
     public function getLootLog()
     {
         return $this->lootLog;
+    }
+
+    /**
+     * Set user
+     *
+     * @param \MiningBundle\Entity\User $user
+     *
+     * @return Character
+     */
+    public function setUser(\MiningBundle\Entity\User $user = null)
+    {
+        $this->user = $user;
+
+        return $this;
+    }
+
+    /**
+     * Get user
+     *
+     * @return \MiningBundle\Entity\User
+     */
+    public function getUser()
+    {
+        return $this->user;
     }
 }

@@ -32,111 +32,14 @@ class Character
      */
     private $lootLog;
 
+    /**
+     * @ORM\ManyToOne(targetEntity="User", inversedBy="character")
+     * @ORM\JoinColumn(name="user_id", referencedColumnName="id")
+     */
+    private $user;
+
     public function __construct() {
         $this->miningOp = new ArrayCollection();
         $this->lootLog = new ArrayCollection();
-    }
-
-
-    /**
-     * Get id
-     *
-     * @return integer
-     */
-    public function getId()
-    {
-        return $this->id;
-    }
-
-    /**
-     * Set name
-     *
-     * @param string $name
-     *
-     * @return Character
-     */
-    public function setName($name)
-    {
-        $this->name = $name;
-
-        return $this;
-    }
-
-    /**
-     * Get name
-     *
-     * @return string
-     */
-    public function getName()
-    {
-        return $this->name;
-    }
-
-    /**
-     * Add miningOp
-     *
-     * @param \MiningBundle\Entity\MiningOp $miningOp
-     *
-     * @return Character
-     */
-    public function addMiningOp(\MiningBundle\Entity\MiningOp $miningOp)
-    {
-        $this->miningOp[] = $miningOp;
-
-        return $this;
-    }
-
-    /**
-     * Remove miningOp
-     *
-     * @param \MiningBundle\Entity\MiningOp $miningOp
-     */
-    public function removeMiningOp(\MiningBundle\Entity\MiningOp $miningOp)
-    {
-        $this->miningOp->removeElement($miningOp);
-    }
-
-    /**
-     * Get miningOp
-     *
-     * @return \Doctrine\Common\Collections\Collection
-     */
-    public function getMiningOp()
-    {
-        return $this->miningOp;
-    }
-
-    /**
-     * Add lootLog
-     *
-     * @param \MiningBundle\Entity\LootLog $lootLog
-     *
-     * @return Character
-     */
-    public function addLootLog(\MiningBundle\Entity\LootLog $lootLog)
-    {
-        $this->lootLog[] = $lootLog;
-
-        return $this;
-    }
-
-    /**
-     * Remove lootLog
-     *
-     * @param \MiningBundle\Entity\LootLog $lootLog
-     */
-    public function removeLootLog(\MiningBundle\Entity\LootLog $lootLog)
-    {
-        $this->lootLog->removeElement($lootLog);
-    }
-
-    /**
-     * Get lootLog
-     *
-     * @return \Doctrine\Common\Collections\Collection
-     */
-    public function getLootLog()
-    {
-        return $this->lootLog;
     }
 }
