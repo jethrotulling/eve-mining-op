@@ -22,6 +22,15 @@ class User extends BaseUser {
      */
     protected $character;
 
+    /**
+     * @ORM\ManyToMany(targetEntity="Group")
+     * @ORM\JoinTable(name="user_user_group",
+     *      joinColumns={@ORM\JoinColumn(name="user_id", referencedColumnName="id")},
+     *      inverseJoinColumns={@ORM\JoinColumn(name="group_id", referencedColumnName="id")}
+     * )
+     */
+    protected $groups;
+
     public function __construct() {
         parent::__construct();
 

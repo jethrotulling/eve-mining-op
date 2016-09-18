@@ -302,4 +302,18 @@ class InvGroups
     {
         return $this->invTypes;
     }
+
+    /**
+     * Set groupId
+     *
+     * @param integer $groupId
+     *
+     * @return InvGroups
+     */
+    public function setGroupId($groupId)
+    {
+        $this->groupId = $groupId;
+
+        return $this;
+    }
 }

@@ -156,4 +156,18 @@ class InvCategories
     {
         return $this->invGroups;
     }
+
+    /**
+     * Set categoryId
+     *
+     * @param integer $categoryId
+     *
+     * @return InvCategories
+     */
+    public function setCategoryId($categoryId)
+    {
+        $this->categoryId = $categoryId;
+
+        return $this;
+    }
 }
