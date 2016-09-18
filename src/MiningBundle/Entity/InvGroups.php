@@ -14,7 +14,6 @@ class InvGroups
     /**
      * @ORM\Id
      * @ORM\Column(name="groupID", type="integer")
-     * @ORM\GeneratedValue
      */
     private $groupId;
 

@@ -14,7 +14,6 @@ class InvCategories
     /**
      * @ORM\Id
      * @ORM\Column(name="categoryID", type="integer")
-     * @ORM\GeneratedValue
      */
     private $categoryId;
 
