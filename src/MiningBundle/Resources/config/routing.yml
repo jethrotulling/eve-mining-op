@@ -7,11 +7,11 @@ mining_new:
   defaults: { _controller: MiningBundle:Mining:new }
 
 mining_detail:
-  path: /detail/{hash}
+  path: /fleet/{hash}
   defaults: { _controller: MiningBundle:Mining:detail }
   methods: [GET]
 
 mining_detail_update:
-  path: /detail/{hash}
+  path: /fleet/{hash}
   defaults: { _controller: MiningBundle:Mining:process }
   methods: [POST, PUT]
