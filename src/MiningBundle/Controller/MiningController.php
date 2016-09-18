@@ -22,10 +22,6 @@ use MiningBundle\Entity\MiningOp;
 
 class MiningController extends Controller
 {
-    public function indexAction()
-    {
-        return $this->render('MiningBundle:Default:index.html.twig');
-    }
 
     public function newAction(Request $request)
     {
