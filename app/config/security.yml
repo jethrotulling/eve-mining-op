@@ -54,7 +54,21 @@ security:
             anonymous:    true
 
     access_control:
+        - { path: ^/(css|images|js)/, role: IS_AUTHENTICATED_ANONYMOUSLY }
+
+        # URL of FOSUserBundle which need to be available to anonymous users
         - { path: ^/login$, role: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/login_check$, role: IS_AUTHENTICATED_ANONYMOUSLY } # for the case of a failed login
         - { path: ^/register, role: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/resetting, role: IS_AUTHENTICATED_ANONYMOUSLY }
-        - { path: ^/admin/, role: ROLE_ADMIN }
+
+        # Secured part of the site
+        # This config requires being logged for the whole site and having the admin role for the admin part.
+        # Change these rules to adapt them to your needs
+#        - { path: ^/admin/, role: ROLE_ADMIN }
+
+        # Anyone can see the homepage
+        - { path: ^/$, role: IS_AUTHENTICATED_ANONYMOUSLY }
+
+        # Must authenticate to access other parts of the site
+        - { path: ^/, role: ROLE_USER }
