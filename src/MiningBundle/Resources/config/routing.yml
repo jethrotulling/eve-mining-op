@@ -1,6 +1,6 @@
 mining_homepage:
     path:     /
-    defaults: { _controller: MiningBundle:Default:index }
+    defaults: { _controller: MiningBundle:Mining:index }
 
 mining_new:
   path: /new
