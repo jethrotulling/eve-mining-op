@@ -2,55 +2,53 @@
 
 {% block body %}
 
-    <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
-        <h1 class="page-header">{{ title }}</h1>
+    <h1 class="page-header">{{ title }}</h1>
 
-        Start Time: {{ miningOp.startTime|date("Y-m-d H:i") }}<br>
-        Finish Time: {{ miningOp.FinishTime|date("Y-m-d H:i") }}
+    Start Time: {{ miningOp.startTime|date("Y-m-d H:i") }}<br>
+    Finish Time: {{ miningOp.FinishTime|date("Y-m-d H:i") }}
 
-        <h2 class="sub-header">Fleet Members</h2>
-        <div class="row placeholders">
-            {% for miner in miners %}
-                <div class="col-xs-6 col-sm-3 placeholder">
-                    <img src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw=="
-                         width="150" height="150" class="img-responsive" alt="Generic placeholder thumbnail">
-                    <h4>{{ miner.character.name }}</h4>
-                    <span class="text-muted">Active/Exempt</span>
-                </div>
-            {% endfor %}
-        </div>
+    <h2 class="sub-header">Fleet Members</h2>
+    <div class="row placeholders">
+        {% for miner in miners %}
+            <div class="col-xs-6 col-sm-3 placeholder">
+                <img src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw=="
+                     width="150" height="150" class="img-responsive" alt="Generic placeholder thumbnail">
+                <h4>{{ miner.character.name }}</h4>
+                <span class="text-muted">Active/Exempt</span>
+            </div>
+        {% endfor %}
+    </div>
 
-        {#<h2 class="sub-header">Upload Log</h2>#}
+    {#<h2 class="sub-header">Upload Log</h2>#}
 
 
-        <h2 class="sub-header">Loot Log</h2>
-        {{ form_start(form) }}
-        {{ form_widget(form) }}
-        {{ form_end(form) }}
-        <div class="table-responsive">
-            <table class="table table-striped">
-                <thead>
+    <h2 class="sub-header">Loot Log</h2>
+    {{ form_start(form) }}
+    {{ form_widget(form) }}
+    {{ form_end(form) }}
+    <div class="table-responsive">
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <th>Name</th>
+                <th>Qty</th>
+                <th>Loot</th>
+                <th>Group</th>
+                <th>Time</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for loot in lootLog %}
                 <tr>
-                    <th>Name</th>
-                    <th>Qty</th>
-                    <th>Loot</th>
-                    <th>Group</th>
-                    <th>Time</th>
+                    <td>{{ loot.character.name }}</td>
+                    <td>{{ loot.quantity }}</td>
+                    <td>{{ loot.item.name }}</td>
+                    <td>{{ loot.itemGroup.name }}</td>
+                    <td>{{ loot.time|date("Y-m-d H:i") }}</td>
+                    {#<td>{{ loot.time }}</td>#}
                 </tr>
-                </thead>
-                <tbody>
-                {% for loot in lootLog %}
-                    <tr>
-                        <td>{{ loot.character.name }}</td>
-                        <td>{{ loot.quantity }}</td>
-                        <td>{{ loot.item.name }}</td>
-                        <td>{{ loot.itemGroup.name }}</td>
-                        <td>{{ loot.time|date("Y-m-d H:i") }}</td>
-                        {#<td>{{ loot.time }}</td>#}
-                    </tr>
-                {% endfor %}
-                </tbody>
-            </table>
-        </div>
+            {% endfor %}
+            </tbody>
+        </table>
     </div>
 {% endblock %}
