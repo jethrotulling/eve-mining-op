@@ -16,6 +16,12 @@ use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
 
+use Symfony\Component\Security\Core\Exception\AccessDeniedException;
+use Symfony\Component\Security\Acl\Domain\ObjectIdentity;
+use Symfony\Component\Security\Acl\Domain\UserSecurityIdentity;
+use Symfony\Component\Security\Acl\Domain\RoleSecurityIdentity;
+use Symfony\Component\Security\Acl\Permission\MaskBuilder;
+
 
 class FleetController extends Controller
 {
@@ -54,6 +60,33 @@ class FleetController extends Controller
             $em = $this->getDoctrine()->getManager();
             $em->persist($op);
             $em->flush();
+
+            // creating the ACL
+            $aclProvider = $this->get('security.acl.provider');
+            $objectIdentity = ObjectIdentity::fromDomainObject($op);
+
+            $acl = $aclProvider->createAcl($objectIdentity);
+
+            // retrieving the security identity of the currently logged-in user
+            $tokenStorage = $this->get('security.token_storage');
+            $user = $tokenStorage->getToken()->getUser();
+            $securityIdentity = UserSecurityIdentity::fromAccount($user);
+
+            $builder = new MaskBuilder();
+            $builder
+                ->add('view')
+                ->add('edit')
+                ->add('delete')
+                ->add('undelete')
+            ;
+            $mask = $builder->get();
+
+            $acl->insertObjectAce($securityIdentity, $mask);
+
+            // Give admin view, edit, delete, undelete ability
+            $securityIdentity = new RoleSecurityIdentity('ROLE_ADMIN');
+            $acl->insertObjectAce($securityIdentity, $mask);
+            $aclProvider->updateAcl($acl);
 
             return $this->redirectToRoute('mining_detail', ['hash' => $op->getHash()]);
         }
@@ -128,6 +161,13 @@ class FleetController extends Controller
             return $this->redirectToRoute('mining_homepage');
         }
 
+        // Check if authorized to edit
+        $authorizationChecker = $this->get('security.authorization_checker');
+        if (false === $authorizationChecker->isGranted('EDIT', $op)) {
+            return $this->redirectToRoute('mining_detail', ['hash' => $hash]);
+//            throw new AccessDeniedException();
+        }
+
         // Your Controller.php
         $form = $this->createFormBuilder()
             ->add('submitFile', FileType::class, ['label' => 'File to Submit'])
@@ -153,6 +193,7 @@ class FleetController extends Controller
 
             // @TODO: Check op date/time before inserting
             // @TODO: Also dont allow duplicates
+            // @TODO: Validate data being submitted
 
             $csv = $form->get('submitFile')->getData();
 

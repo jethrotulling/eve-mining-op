@@ -19,13 +19,14 @@
         {% endfor %}
     </div>
 
-    {#<h2 class="sub-header">Upload Log</h2>#}
-
-
     <h2 class="sub-header">Loot Log</h2>
-    {{ form_start(form) }}
-    {{ form_widget(form) }}
-    {{ form_end(form) }}
+
+    {% if is_granted('EDIT', miningOp) %}
+        {{ form_start(form) }}
+        {{ form_widget(form) }}
+        {{ form_end(form) }}
+    {% endif %}
+
     <div class="table-responsive">
         <table class="table table-striped">
             <thead>
