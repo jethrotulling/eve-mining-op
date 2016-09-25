@@ -1,5 +1,7 @@
 # Jethro's Mining Op
 
+### Docker Compose
+MYSQL_ROOT_PASSWORD=password docker-compose up -d
 
 
 ### Create database
@@ -11,6 +13,10 @@ php bin/console doctrine:schema:update --force
 
 
 ### Other helpful commands
+php bin/console debug:router
+
+php bin/console doctrine:database:import eve_mining.sql
+
 php bin/console doctrine:database:drop --force
 
 
