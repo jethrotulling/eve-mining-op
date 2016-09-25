@@ -23,7 +23,7 @@ class User extends BaseUser {
     protected $character;
 
     /**
-     * @ORM\ManyToMany(targetEntity="Group")
+     * @ORM\ManyToMany(targetEntity="UserGroup")
      * @ORM\JoinTable(name="user_user_group",
      *      joinColumns={@ORM\JoinColumn(name="user_id", referencedColumnName="id")},
      *      inverseJoinColumns={@ORM\JoinColumn(name="group_id", referencedColumnName="id")}

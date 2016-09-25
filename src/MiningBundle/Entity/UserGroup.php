@@ -9,7 +9,7 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Entity
  * @ORM\Table(name="user_group")
  */
-class Group extends BaseGroup {
+class UserGroup extends BaseGroup {
     /**
      * @ORM\Id
      * @ORM\Column(type="integer")
